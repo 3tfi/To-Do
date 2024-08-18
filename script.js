@@ -72,8 +72,9 @@ function editTask(element) {
 }
 
 function markDone(element) {
-    const taskNameElement = element.parentElement.previousElementSibling;
-    const taskType = taskNameElement.textContent.match(/\(([^)]+)\)$/)[1];
+    const taskElement = element.closest('li');
+    const taskNameElement = taskElement.querySelector('.task-name');
+    const taskName = taskNameElement.textContent.split(' (')[0];
     const isDone = taskNameElement.classList.toggle('done');
 
     if (isDone) {
@@ -84,6 +85,7 @@ function markDone(element) {
 
     updateTaskStatus(taskNameElement.textContent, isDone);
 }
+
 
 function moveTaskToDone(taskName) {
     const doneTaskList = document.getElementById('doneTaskList');
